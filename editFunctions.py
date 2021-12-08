@@ -1,3 +1,4 @@
+from plot_deconvolution import Lucy_Restoration
 from PIL import Image, ImageFilter, ImageOps
 from PIL.ImageFilter import (
      BLUR, CONTOUR, EDGE_ENHANCE, EDGE_ENHANCE_MORE,
@@ -63,4 +64,8 @@ def histogramEqualize(curImg, counter):
      newImg = ImageOps.equalize(current, mask = None)
      newImg.save('image' + str(counter) + '.jpg')
 
+def LucyRestoration(curImg, counter):
+     current = Image.open(curImg)
+     newImg = Lucy_Restoration(current)
+     newImg.save('image' + str(counter) + '.jpg')
 

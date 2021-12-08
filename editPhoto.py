@@ -1,6 +1,6 @@
 from tkinter import *
 from PIL import ImageTk,Image
-from editFunctions import histogramEqualize, sharpenPic, blurPic, rotateCounter, rotateClock, cropPic, sketchPic, oilPic, pencilPic, foilPic, negativePic
+from editFunctions import LucyRestoration, histogramEqualize, sharpenPic, blurPic, rotateCounter, rotateClock, cropPic, sketchPic, oilPic, pencilPic, foilPic, negativePic
 
 def changeImage(counter):
      img = ImageTk.PhotoImage(Image.open('image' + str(counter) + '.jpg'))
@@ -90,6 +90,13 @@ def histogramEqualizationFunc():
      histogramEqualize(curImg, counter)
      changeImage(counter)
 
+def LucyRestorationFunc():
+     global counter
+     curImg = 'image' + str(counter) + '.jpg'
+     counter = counter + 1
+     LucyRestoration(curImg, counter)
+     changeImage(counter)
+
 main = Tk()
 counter = 0
 main.title("Photo Editor")
@@ -118,6 +125,8 @@ panel.pack(side=LEFT, padx=20)
 
 histogramButton = Button(editingBox, text="Histogram equalization", command=histogramEqualizationFunc, width=20 )
 histogramButton.pack(side = BOTTOM)
+restorationButton = Button(editingBox, text="Lucy-Richardson restoration", command=LucyRestorationFunc, width=20 )
+restorationButton.pack(side = BOTTOM)
 negativeButton = Button(editingBox, text="Photo negative", command=negativeImgFunc, width=20)
 negativeButton.pack(side = BOTTOM)
 foilButton = Button(editingBox, text="Foil art", command=foilImgFunc, width=20)
