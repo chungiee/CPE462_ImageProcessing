@@ -148,13 +148,14 @@ rotateClockButton = Button(editingBox, text="Rotate Clockwise", command=rotateCl
 rotateClockButton.pack(side=TOP)
 
 # img = ImageTk.PhotoImage(Image.open('image' + str(counter) + '.jpg'))
-
 pre_img = Image.open('image' + str(counter) + '.jpg')
-if pre_img.width > 1600 or pre_img.height > 1000:
-    (width, height) = (pre_img.width // 1.01, pre_img.height // 1.01)
+if pre_img.width > 850 or pre_img.height > 500:
+    (width, height) = (math.floor(pre_img.width / 1.1), math.floor(pre_img.height / 1.1))
     pre_img = pre_img.resize((width, height))
     pre_img.save('image' + str(counter) + '.jpg')
 img = ImageTk.PhotoImage(pre_img)
+panel = Label(main, image=img)
+panel.pack(side=LEFT, padx=20)
 
 panel = Label(main, image=img)
 panel.pack(side=LEFT, padx=20)
