@@ -1,6 +1,6 @@
 from tkinter import *
 from PIL import ImageTk,Image
-from editFunctions import LucyRestoration, histogramEqualize, sharpenPic, blurPic, rotateCounter, rotateClock, cropPic, sketchPic, oilPic, pencilPic, foilPic, negativePic
+from editFunctions import histogramEqualize_2, LucyRestoration, histogramEqualize, sharpenPic, blurPic, rotateCounter, rotateClock, cropPic, sketchPic, oilPic, pencilPic, foilPic, negativePic
 
 def changeImage(counter):
      img = ImageTk.PhotoImage(Image.open('image' + str(counter) + '.jpg'))
@@ -97,6 +97,13 @@ def LucyRestorationFunc():
      LucyRestoration(curImg, counter)
      changeImage(counter)
 
+def histogramEqualization_2_Func():
+     global counter
+     curImg = 'image' + str(counter) + '.jpg'
+     counter = counter + 1
+     histogramEqualize_2(curImg, counter)
+     changeImage(counter)
+
 main = Tk()
 counter = 0
 main.title("Photo Editor")
@@ -123,6 +130,8 @@ img = ImageTk.PhotoImage(Image.open('image' + str(counter) + '.jpg'))
 panel = Label(main, image=img)
 panel.pack(side=LEFT, padx=20)
 
+histogramButton_2 = Button(editingBox, text="Histogram equalization 2.0", command=histogramEqualization_2_Func, width=20 )
+histogramButton_2.pack(side = BOTTOM)
 histogramButton = Button(editingBox, text="Histogram equalization", command=histogramEqualizationFunc, width=20 )
 histogramButton.pack(side = BOTTOM)
 restorationButton = Button(editingBox, text="Lucy-Richardson restoration", command=LucyRestorationFunc, width=20 )
