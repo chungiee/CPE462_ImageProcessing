@@ -1,8 +1,8 @@
 from tkinter import *
 import math
-from PIL import ImageTk
+from PIL import ImageTk 
 from PIL import Image
-from editFunctions import LucyRestoration, histogramEqualize, sharpenPic, blurPic, rotateCounter, rotateClock, cropPic, \
+from editFunctions import LucyRestoration, histogramEqualize, histogramEqualize_2, sharpenPic, blurPic, rotateCounter, rotateClock, cropPic, \
     sketchPic, oilPic, pencilPic, foilPic, negativePic
 from canny_edges import cannyEdges
 
@@ -107,6 +107,12 @@ def histogramEqualizationFunc():
     histogramEqualize(curImg, counter)
     changeImage(counter)
 
+def histogramEqualization_2_Func():
+     global counter
+     curImg = 'image' + str(counter) + '.jpg'
+     counter = counter + 1
+     histogramEqualize_2(curImg, counter)
+     changeImage(counter)
 
 def LucyRestorationFunc():
     global counter
@@ -155,14 +161,22 @@ if pre_img.width > 850 or pre_img.height > 500:
     pre_img.save('image' + str(counter) + '.jpg')
 img = ImageTk.PhotoImage(pre_img)
 
+#filterLabel = Label(editingBox, text="Original", font=16)
+#filterLabel.pack(side=TOP, pady=10)
 panel = Label(main, image=img)
 panel.pack(side=LEFT, padx=20)
 
+
+#filterLabel = Label(editingBox, text="Edited", font=16)
+#filterLabel.pack(side=TOP, pady=10)
 panel = Label(main, image=img)
 panel.pack(side=LEFT, padx=20)
+
 
 histogramButton = Button(editingBox, text="Canny Edge Detection", command=cannyEdgeDetectionFunc, width=20)
 histogramButton.pack(side=BOTTOM)
+histogramButton_2 = Button(editingBox, text="Grayscale Equalization", command=histogramEqualization_2_Func, width=20 )
+histogramButton_2.pack(side = BOTTOM)
 histogramButton = Button(editingBox, text="Histogram equalization", command=histogramEqualizationFunc, width=20)
 histogramButton.pack(side=BOTTOM)
 restorationButton = Button(editingBox, text="Lucy-Richardson restoration", command=LucyRestorationFunc, width=20)
@@ -179,6 +193,7 @@ sketchButton = Button(editingBox, text="Sketch light", command=sketchImgFunc, wi
 sketchButton.pack(side=BOTTOM)
 filterLabel = Label(editingBox, text="Filters", font=16)
 filterLabel.pack(side=BOTTOM, pady=10)
+
 
 editingBox.pack()
 main.mainloop()

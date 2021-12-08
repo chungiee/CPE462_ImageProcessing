@@ -83,17 +83,11 @@ def LucyRestoration(curImg, counter):
 
 def histogramEqualize_2(curImg, counter):
      img = Image.open(curImg)
-     # convert to grayscale
-     img_gray = img.convert(mode='L')
-
-     #convert to NumPy array
-     img_array = np.asarray(img_gray)
-
-     # PERFORM HISTOGRAM EQUALIZATION
+     img_gray = img.convert(mode='L') # convert to grayscale
+     img_array = np.asarray(img_gray)  #convert to NumPy array
 
      # STEP 1: Normalized cumulative histogram
-     #flatten image array and calculate histogram via binning
-     histogram_array = np.bincount(img_array.flatten(), minlength=256)
+     histogram_array = np.bincount(img_array.flatten(), minlength=256)      #flatten image array and calculate histogram via binning
 
      #normalize
      num_pixels = np.sum(histogram_array)
@@ -101,7 +95,6 @@ def histogramEqualize_2(curImg, counter):
 
      #normalized cumulative histogram
      chistogram_array = np.cumsum(histogram_array)
-
 
      # STEP 2: Pixel mapping lookup table
 
@@ -118,9 +111,5 @@ def histogramEqualize_2(curImg, counter):
      # reshape and write back into img_array
      eq_img_array = np.reshape(np.asarray(eq_img_list), img_array.shape)
 
-     ######################################
-     # WRITE EQUALIZED IMAGE TO FILE
-     ######################################
-     #convert NumPy array to pillow Image and write to file
-     eq_img = Image.fromarray(eq_img_array, mode='L')
+     eq_img = Image.fromarray(eq_img_array, mode='L') #convert NumPy array to pillow Image and write to file
      eq_img.save('image' + str(counter) + '.jpg')
