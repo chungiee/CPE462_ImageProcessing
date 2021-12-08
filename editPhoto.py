@@ -1,5 +1,5 @@
 from tkinter import *
-
+import math
 from PIL import ImageTk
 from PIL import Image
 from editFunctions import LucyRestoration, histogramEqualize, sharpenPic, blurPic, rotateCounter, rotateClock, cropPic, \
@@ -154,6 +154,7 @@ if pre_img.width > 850 or pre_img.height > 500:
     pre_img = pre_img.resize((width, height))
     pre_img.save('image' + str(counter) + '.jpg')
 img = ImageTk.PhotoImage(pre_img)
+
 panel = Label(main, image=img)
 panel.pack(side=LEFT, padx=20)
 
