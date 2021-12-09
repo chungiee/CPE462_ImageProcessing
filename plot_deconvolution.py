@@ -23,37 +23,37 @@ from scipy.signal import convolve2d as conv2
 
 from skimage import color, restoration
 
+
 def Lucy_Restoration(current):
-       rng = np.random.default_rng()
+    rng = np.random.default_rng()
 
-       original = color.rgb2gray(current)
+    original = color.rgb2gray(current)
 
-       psf = np.ones((5, 5)) / 25
-       original = conv2(original, psf, 'same')
+    psf = np.ones((5, 5)) / 25
+    original = conv2(original, psf, 'same')
 
-       # Add Noise to Image
-       original_noisy = original.copy()
-       original_noisy += (rng.poisson(lam=25, size=original.shape) - 10) / 255.
+    # Add Noise to Image
+    original_noisy = original.copy()
+    original_noisy += (rng.poisson(lam=25, size=original.shape) - 10) / 255.
 
-       # Restore Image using Richardson-Lucy algorithm
-       deconvolved_RL = restoration.richardson_lucy(original_noisy, psf, num_iter=30)
-       #finalcolor = gray2rgb(deconvolved_RL)
-       fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(8, 5))
-       plt.gray()
+    # Restore Image using Richardson-Lucy algorithm
+    deconvolved_RL = restoration.richardson_lucy(original_noisy, psf, num_iter=30)
+    # finalcolor = gray2rgb(deconvolved_RL)
+    fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(8, 5))
+    plt.gray()
 
-       for a in (ax[0], ax[1], ax[2]):
-              a.axis('off')
+    for a in (ax[0], ax[1], ax[2]):
+        a.axis('off')
 
-       ax[0].imshow(original)
-       ax[0].set_title('Original Data')
+    ax[0].imshow(original)
+    ax[0].set_title('Original Data')
 
-       ax[1].imshow(original_noisy)
-       ax[1].set_title('Noisy data')
+    ax[1].imshow(original_noisy)
+    ax[1].set_title('Noisy data')
 
-       ax[2].imshow(deconvolved_RL, vmin=original_noisy.min(), vmax=original_noisy.max())
-       ax[2].set_title('Restoration using\nRichardson-Lucy')
+    ax[2].imshow(deconvolved_RL, vmin=original_noisy.min(), vmax=original_noisy.max())
+    ax[2].set_title('Restoration using\nRichardson-Lucy')
 
-
-       fig.subplots_adjust(wspace=0.02, hspace=0.2,
-                     top=0.9, bottom=0.05, left=0, right=1)
-       plt.show()
+    fig.subplots_adjust(wspace=0.02, hspace=0.2,
+                        top=0.9, bottom=0.05, left=0, right=1)
+    plt.show()
