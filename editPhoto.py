@@ -12,6 +12,10 @@ def changeImage(counter):
     panel.configure(image=img)
     panel.image = img
 
+def changeImageLucy(counter):
+    img = ImageTk.PhotoImage(Image.open('image' + str(counter) + '.jpeg'))
+    panel.configure(image=img)
+    panel.image = img
 
 def sharpenImgFunc():
     global counter
@@ -118,8 +122,8 @@ def LucyRestorationFunc():
     global counter
     curImg = 'image' + str(counter) + '.jpg'
     counter = counter + 1
-    LucyRestoration(curImg, counter)
-    changeImage(counter)
+    LucyRestoration(curImg)
+    changeImageLucy(counter)
 
 def cannyEdgeDetectionFunc():
     global counter

@@ -76,10 +76,9 @@ def histogramEqualize(curImg, counter):
     newImg.save('image' + str(counter) + '.jpg')
 
 
-def LucyRestoration(curImg, counter):
+def LucyRestoration(curImg):
     current = Image.open(curImg)
-    newImg = Lucy_Restoration(current)
-    newImg.save('image' + str(counter) + '.jpg')
+    Lucy_Restoration(current)
 
 def histogramEqualize_2(curImg, counter):
      current = Image.open(curImg)
